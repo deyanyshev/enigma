@@ -1,0 +1,10 @@
+rotors:
+  - "ОБАГ"
+  - "БГОА"
+reflector: "ГОБА"
+plugs:
+  - "АГ"
+positions:
+  - 0
+  - 0
+alphabet: "АБОГ"
