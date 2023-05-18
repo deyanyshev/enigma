@@ -1,24 +1,10 @@
 rotors:
-- "NVTDFMXHQPWIESJZLCAUKRGYBO"
-- "RNKXALDZIOBHTWYJEVCQMPFGSU"
-- "HXOIRGSBVLTEQPAMDKWFCZNUJY"
-reflector: "VSFJHCWEYDNXQKUZMTBROAGLIP"
+  - "ОБАГ"
+  - "БГОА"
+reflector: "ГОБА"
 plugs:
-- "BT"
-- "IS"
-- "PC"
-- "YH"
-- "ZR"
-- "GD"
-- "XN"
-- "UW"
-- "LO"
-- "MJ"
-- "QE"
-- "AF"
-- "KV"
+  - "АГ"
 positions:
-- 1
-- 15
-- 9
-alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  - 0
+  - 0
+alphabet: "АБОГ"
