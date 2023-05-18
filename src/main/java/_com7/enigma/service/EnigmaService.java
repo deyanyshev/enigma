@@ -18,13 +18,20 @@ public class EnigmaService {
         SettingsDto settings = settingsService.getSettings();
         Enigma enigma = settingsMapper.SettingsToEnigma(settings);
 
-        enigma.start();
-
         for (int i = 0; i < text.length(); ++i) {
             Character symbol = text.charAt(i);
             result += enigma.encryptSymbol(symbol);
         }
 
+        for (int i = 0; i < settings.getPositions().size(); ++i) {
+            settings.getPositions().set(i, enigma.getRotors().get(i).getPosition());
+        }
+        settingsService.saveSettings(settings);
+
         return result;
+    }
+
+    public String decrypt(String text) {
+        return encrypt(text);
     }
 }

@@ -17,7 +17,7 @@ public class EnigmaController {
     }
 
     @GetMapping("/decrypt/{text}")
-    public String decrypt(@PathVariable String text) {
-        return "";
+    public ResultDto decrypt(@PathVariable String text) {
+        return ResultDto.builder().result(enigmaService.decrypt(text)).build();
     }
 }

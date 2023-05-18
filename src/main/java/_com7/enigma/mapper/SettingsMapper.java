@@ -18,7 +18,7 @@ public class SettingsMapper {
                     Rotor.builder()
                             .values(settings.getRotors().get(i))
                             .position(settings.getPositions().get(i))
-                            .alphabet(Alphabet.builder().alphabet(settings.getAlphabet()).build())
+                            .alphabet(settings.getAlphabet())
                             .build()
             );
         }
@@ -26,8 +26,7 @@ public class SettingsMapper {
         for (int i = 0; i < settings.getPlugs().size(); ++i) {
             plugs.add(
                     Plug.builder()
-                            .plug(settings.getPlugs().get(0))
-                            .alphabet(Alphabet.builder().alphabet(settings.getAlphabet()).build())
+                            .plug(settings.getPlugs().get(i))
                             .build()
             );
         }
@@ -35,10 +34,10 @@ public class SettingsMapper {
         return Enigma.builder()
                 .rotors(rotors)
                 .plugs(plugs)
-                .alphabet(Alphabet.builder().alphabet(settings.getAlphabet()).build())
+                .alphabet(settings.getAlphabet())
                 .reflector(Reflector.builder()
                         .reflector(settings.getReflector())
-                        .alphabet(Alphabet.builder().alphabet(settings.getAlphabet()).build())
+                        .alphabet(settings.getAlphabet())
                         .build()
                 )
                 .build();

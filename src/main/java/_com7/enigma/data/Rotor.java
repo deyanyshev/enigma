@@ -9,27 +9,25 @@ import lombok.Setter;
 @Builder
 public class Rotor {
     private String values;
-    private Alphabet alphabet;
+    private String alphabet;
     private Integer position;
 
-    public State nextState(State state, boolean reverse) {
-        System.out.println(values);
-        System.out.println(alphabet.getAlphabet());
-        if (reverse) {
-            char symbol = alphabet.getAlphabet().charAt(state.getPosition());
-            return new State(symbol, values.indexOf(symbol));
-        } else {
-            char symbol = values.charAt(state.getPosition());
-            return new State(symbol, alphabet.getAlphabet().indexOf(symbol));
-        }
+    public Character nextState(Character symbol, boolean reverse) {
+        int index = (alphabet.indexOf(symbol) + position) % alphabet.length();
+        symbol = alphabet.charAt(index);
+
+        String source = reverse ? values : alphabet;
+        String dest = reverse ? alphabet : values;
+
+        index = source.indexOf(symbol);
+        symbol = dest.charAt(index);
+
+        index = (alphabet.indexOf(symbol) - position + alphabet.length()) % alphabet.length();
+        symbol = alphabet.charAt(index);
+        return symbol;
     }
 
-    public void rotate(Boolean update) {
-        if (update) {
-            position = (position + 1) % values.length();
-        }
-
-        values = values.substring(1) + values.charAt(0);
-        alphabet.rotate();
+    public void rotate() {
+        position = (position + 1) % values.length();
     }
 }

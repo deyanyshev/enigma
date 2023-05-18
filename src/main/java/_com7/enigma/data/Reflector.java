@@ -9,10 +9,9 @@ import lombok.Setter;
 @Builder
 public class Reflector {
     private String reflector;
-    private Alphabet alphabet;
+    private String alphabet;
 
-    public State nextState(State state) {
-        Character symbol = alphabet.getAlphabet().charAt(state.getPosition());
-        return new State(symbol, reflector.indexOf(symbol));
+    public Character nextState(Character symbol) {
+        return reflector.charAt(alphabet.indexOf(symbol));
     }
 }

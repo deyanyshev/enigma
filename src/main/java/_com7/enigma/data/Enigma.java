@@ -10,63 +10,39 @@ import java.util.List;
 public class Enigma {
     private List<Rotor> rotors;
     private List<Plug> plugs;
-    private Alphabet alphabet;
+    private String alphabet;
     private Reflector reflector;
-
-    public void start() {
-        for (Rotor rotor: rotors) {
-            for (int i = 0; i < rotor.getPosition(); ++i) {
-                rotor.rotate(false);
-                System.out.println(rotor.getPosition());
-            }
-        }
-    }
 
     public Character encryptSymbol(Character symbol) {
         rotateRotors();
-        State state = new State(symbol, alphabet.getPosition(symbol));
-        System.out.println("-----------");
-        System.out.println(state.getSymbol() + " " + state.getPosition().toString());
 
         for (Plug plug: plugs) {
-            if (plug.plug.indexOf(symbol) != -1) {
-                state = plug.nextState(symbol);
-            }
+            symbol = plug.nextState(symbol);
         }
-        System.out.println(state.getSymbol() + " " + state.getPosition().toString());
 
         for (Rotor rotor: rotors) {
-            state = rotor.nextState(state, false);
-            System.out.println(state.getSymbol() + " " + state.getPosition().toString());
+            symbol = rotor.nextState(symbol, false);
         }
 
-        state = reflector.nextState(state);
-        System.out.println(state.getSymbol() + " " + state.getPosition().toString());
+        symbol = reflector.nextState(symbol);
 
         for (int i = rotors.size() - 1; i >= 0; --i) {
-            state = rotors.get(i).nextState(state, true);
-            System.out.println(state.getSymbol() + " " + state.getPosition().toString());
+            symbol = rotors.get(i).nextState(symbol, true);
         }
-
-        symbol = alphabet.getAlphabet().charAt(state.getPosition());
-        state.setSymbol(symbol);
 
         for (Plug plug: plugs) {
-            if (plug.plug.indexOf(symbol) != -1) {
-                state = plug.nextState(symbol);
-            }
+            symbol = plug.nextState(symbol);
         }
-        System.out.println(state.getSymbol() + " " + state.getPosition().toString());
 
-        return state.getSymbol();
+        return symbol;
     }
 
     public void rotateRotors() {
         int i = 1;
-        rotors.get(0).rotate(true);
+        rotors.get(0).rotate();
 
         while (i < rotors.size() && rotors.get(i - 1).getPosition() == 1) {
-            rotors.get(i).rotate(true);
+            rotors.get(i).rotate();
             i += 1;
         }
     }

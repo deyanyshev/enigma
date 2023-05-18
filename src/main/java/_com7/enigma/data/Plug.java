@@ -10,13 +10,16 @@ import lombok.Setter;
 @Builder
 public class Plug {
     String plug;
-    Alphabet alphabet;
 
-    public State nextState(Character symbol) {
+    public Character nextState(Character symbol) {
         if (plug.charAt(0) == symbol) {
-            return new State(plug.charAt(1), alphabet.getPosition(plug.charAt(1)));
-        } else {
-            return new State(plug.charAt(0), alphabet.getPosition(plug.charAt(0)));
+            return plug.charAt(1);
         }
+
+        if (plug.charAt(1) == symbol) {
+            return plug.charAt(0);
+        }
+
+        return symbol;
     }
 }
